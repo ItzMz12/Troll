@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#09090f">
+  <meta name="description" content="A totally normal website. Probably.">
+  <title>Definitely A Normal Website</title>
+  <style>
+    :root { color-scheme: dark; --bg:#09090f; --panel:#12121d; --muted:#aaa9bc; --pink:#ff4f9a; --violet:#8b5cf6; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; min-height:100%; }
+    body {
+      min-height:100vh; min-height:100dvh; overflow-x:hidden; color:#f8f7ff;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(ellipse at 18% 12%, rgba(139,92,246,.22), transparent 35%),
+        radial-gradient(ellipse at 85% 80%, rgba(255,79,154,.13), transparent 34%), var(--bg);
+      display:grid; place-items:center; padding:20px;
+    }
+    body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.2; background-image:radial-gradient(#777 0.7px,transparent .7px); background-size:23px 23px; mask-image:linear-gradient(to bottom,black,transparent 90%); }
+    .card { position:relative; width:min(100%,560px); text-align:center; padding:clamp(25px,6vw,48px); border:1px solid rgba(255,255,255,.12); border-radius:28px; background:linear-gradient(145deg,rgba(25,24,40,.92),rgba(12,12,20,.9)); box-shadow:0 25px 100px rgba(0,0,0,.42), inset 0 1px rgba(255,255,255,.06); backdrop-filter:blur(16px); animation:appear .55s ease both; }
+    .pill { display:inline-flex; gap:8px; align-items:center; padding:7px 12px; border-radius:999px; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:#e5d7ff; border:1px solid rgba(179,144,255,.25); background:rgba(139,92,246,.12); }
+    .dot { width:7px;height:7px;border-radius:50%;background:#b7ff7a;box-shadow:0 0 12px #b7ff7a; }
+    h1 { margin:22px 0 12px; font-size:clamp(2rem,8vw,3.5rem); line-height:1.03; letter-spacing:-.055em; }
+    .gradient { background:linear-gradient(90deg,#fff,#cbb7ff 48%,#ff91c3); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    p { color:var(--muted); line-height:1.65; margin:0 auto; max-width:390px; }
+    .emoji { display:block; font-size:clamp(3rem,12vw,5rem); margin:18px 0 10px; filter:drop-shadow(0 8px 25px rgba(139,92,246,.3)); animation:float 3s ease-in-out infinite; }
+    .buttons { display:flex; gap:12px; margin-top:28px; }
+    button { flex:1; min-height:54px; border:0; border-radius:15px; font:700 15px/1 inherit; cursor:pointer; transition:transform .18s ease,filter .18s ease,box-shadow .18s ease; -webkit-tap-highlight-color:transparent; }
+    button:active { transform:scale(.97); }
+    .yes { color:white; background:linear-gradient(110deg,var(--violet),var(--pink)); box-shadow:0 9px 28px rgba(139,92,246,.24); }
+    .no { color:#f0edf9; background:#242332; border:1px solid rgba(255,255,255,.12); }
+    button:hover { filter:brightness(1.12); transform:translateY(-2px); }
+    .foot { margin-top:25px; font-size:11px; color:#77768b; letter-spacing:.04em; }
+    .counter { color:#d6c4ff; font-variant-numeric:tabular-nums; }
+    .ending { position:fixed; inset:0; z-index:5; display:none; overflow:auto; padding:20px; background:#050507; place-items:center; text-align:center; }
+    .ending.show { display:grid; animation:appear .45s ease both; }
+    .ending-inner { width:min(100%,850px); }
+    .gorilla { display:block; width:100%; max-height:72dvh; object-fit:contain; border-radius:18px; box-shadow:0 0 70px rgba(255,255,255,.08); }
+    .ending h2 { font-size:clamp(2rem,8vw,4.5rem); margin:20px 0 8px; letter-spacing:-.05em; }
+    .ending p { margin-bottom:22px; }
+    .again { flex:none; width:min(100%,250px); background:#242332; color:#fff; border:1px solid #4c465e; padding:0 20px; }
+    .hidden { display:none !important; }
+    @keyframes appear { from { opacity:0; transform:translateY(10px) scale(.985); } to { opacity:1; transform:translateY(0) scale(1); } }
+    @keyframes float { 0%,100% { transform:translateY(0) rotate(-3deg); } 50% { transform:translateY(-8px) rotate(3deg); } }
+    @media (max-width:380px) { body { padding:12px; } .card { padding:24px 18px; border-radius:22px; } .buttons { gap:8px; } button { min-height:51px; } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
+  </style>
+</head>
+<body>
+  <main class="card" id="questionCard">
+    <div class="pill"><span class="dot"></span> 100% normal website</div>
+    <span class="emoji" aria-hidden="true">🕵️</span>
+    <h1><span class="gradient">Click here to see my face</span></h1>
+    <p>It's definitely worth it. Nothing weird is going to happen. Promise. Probably.</p>
+    <div class="buttons">
+      <button class="yes" id="yesBtn">YES 😎</button>
+      <button class="no" id="noBtn">NO 💀</button>
+    </div>
+    <div class="foot">TRUST LEVEL: <span class="counter" id="trust">100%</span> · LOOP <span class="counter" id="loopCount">01</span></div>
+  </main>
+
+  <section class="ending" id="ending" aria-live="polite">
+    <div class="ending-inner">
+      <img class="gorilla" src="assets/gorilla.jpg" alt="The legendary gorilla ending">
+      <h2>💀 BRO REALLY PRESSED NO.</h2>
+      <p>You had ONE job. The face reveal is now permanently in your lore.</p>
+      <button class="again" id="againBtn">Run it back ↻</button>
+    </div>
+  </section>
+
+  <script>
+    (() => {
+      const yes = document.getElementById('yesBtn');
+      const no = document.getElementById('noBtn');
+      const again = document.getElementById('againBtn');
+      const card = document.getElementById('questionCard');
+      const ending = document.getElementById('ending');
+      const loopLabel = document.getElementById('loopCount');
+      const trustLabel = document.getElementById('trust');
+      let loops = 1;
+
+      function updateLoop() {
+        loopLabel.textContent = String(loops).padStart(2, '0');
+        trustLabel.textContent = Math.max(0, 100 - (loops - 1) * 7) + '%';
+        card.animate([{ transform:'scale(.985)', opacity:.7 }, { transform:'scale(1)', opacity:1 }], { duration:240, easing:'ease-out' });
+      }
+      yes.addEventListener('click', () => {
+        loops += 1;
+        updateLoop();
+        // The same question returns forever: no separate pages/files required.
+        const titles = [
+          'You sure you wanna see my face?',
+          'Still curious? That is brave.',
+          'Okay but like… REALLY?',
+          'The face reveal is getting suspicious.',
+          'Last chance. Definitely the last. 👀'
+        ];
+        card.querySelector('h1').innerHTML = '<span class="gradient">' + titles[(loops - 2) % titles.length] + '</span>';
+        card.querySelector('p').textContent = 'You pressed YES ' + (loops - 1) + ' time' + (loops === 2 ? '' : 's') + '. There is no end to this. Try NO if you dare.';
+        history.replaceState({ loops }, '', '#yes-' + loops);
+      });
+      no.addEventListener('click', () => {
+        card.classList.add('hidden');
+        ending.classList.add('show');
+        document.title = 'YOU PRESSED NO 💀';
+        history.replaceState({ ending:true }, '', '#face-reveal');
+      });
+      again.addEventListener('click', () => {
+        loops = 1;
+        card.classList.remove('hidden');
+        ending.classList.remove('show');
+        card.querySelector('h1').innerHTML = '<span class="gradient">Click here to see my face</span>';
+        card.querySelector('p').textContent = "It's definitely worth it. Nothing weird is going to happen. Promise. Probably.";
+        document.title = 'Definitely A Normal Website';
+        history.replaceState({}, '', location.pathname);
+        updateLoop();
+      });
+      window.addEventListener('popstate', () => {
+        if (location.hash === '#face-reveal') {
+          card.classList.add('hidden'); ending.classList.add('show');
+        } else {
+          ending.classList.remove('show'); card.classList.remove('hidden');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
